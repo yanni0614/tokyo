@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>東京7日旅遊攻略</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;600;900&family=Shippori+Mincho:wght@400;700&family=Zen+Kaku+Gothic+New:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --vermillion: #c0392b;
+    --gold: #d4a854;
+    --mist: #f0ece6;
+    --paper: #faf7f2;
+    --sakura: #e8b4c0;
+    --teal: #2c6e7a;
+    --deep: #0d1b2a;
+    --accent: #e74c3c;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--deep);
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    background: var(--deep);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse at 20% 50%, rgba(192,57,43,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(44,110,122,0.2) 0%, transparent 50%),
+      radial-gradient(ellipse at 60% 80%, rgba(212,168,84,0.1) 0%, transparent 40%);
+  }
+
+  .hero-lines {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(255,255,255,0.03) 60px),
+      repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(255,255,255,0.03) 60px);
+  }
+
+  .torii-svg {
+    position: absolute;
+    right: -30px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.06;
+    width: 500px;
+    height: 600px;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .jp-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(4rem, 12vw, 10rem);
+    color: rgba(255,255,255,0.08);
+    letter-spacing: 0.3em;
+    line-height: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    pointer-events: none;
+    animation: fadeIn 2s ease forwards;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: slideUp 1s 0.3s ease forwards;
+  }
+
+  .hero-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(2.5rem, 7vw, 5.5rem);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: slideUp 1s 0.5s ease forwards;
+  }
+
+  .hero-title span {
+    color: var(--vermillion);
+  }
+
+  .hero-sub {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.15em;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: slideUp 1s 0.7s ease forwards;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--vermillion);
+    color: #fff;
+    padding: 16px 40px;
+    font-size: 0.9rem;
+    letter-spacing: 0.2em;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    opacity: 0;
+    animation: slideUp 1s 0.9s ease forwards;
+  }
+
+  .hero-cta:hover {
+    background: #a93226;
+    transform: translateY(-2px);
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.3);
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    animation: bounce 2s infinite;
+  }
+
+  .scroll-hint::after {
+    content: '';
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent);
+  }
+
+  /* MAIN APP */
+  .app-wrapper {
+    background: var(--paper);
+    position: relative;
+  }
+
+  /* NAV */
+  .sticky-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--deep);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    gap: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .sticky-nav::-webkit-scrollbar { display: none; }
+
+  .nav-brand {
+    font-family: 'Noto Serif TC', serif;
+    color: var(--gold);
+    font-size: 1rem;
+    font-weight: 900;
+    white-space: nowrap;
+    margin-right: 20px;
+    padding: 16px 0;
+  }
+
+  .day-tab {
+    padding: 16px 18px;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.4);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.25s;
+    border-bottom: 2px solid transparent;
+    background: none;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    font-family: inherit;
+  }
+
+  .day-tab:hover { color: rgba(255,255,255,0.8); }
+
+  .day-tab.active {
+    color: #fff;
+    border-bottom-color: var(--vermillion);
+  }
+
+  /* LAYOUT */
+  .content-grid {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ITINERARY PANEL */
+  .itinerary-panel {
+    padding: 40px;
+  }
+
+  .day-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+
+  .day-number {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 4rem;
+    font-weight: 900;
+    color: rgba(0,0,0,0.06);
+    line-height: 1;
+  }
+
+  .day-info h2 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .day-info p {
+    font-size: 0.85rem;
+    color: rgba(0,0,0,0.4);
+    letter-spacing: 0.1em;
+  }
+
+  .day-theme-badge {
+    margin-left: auto;
+    background: var(--vermillion);
+    color: #fff;
+    font-size: 0.7rem;
+    padding: 6px 16px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  /* STOPS */
+  .stops-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .stop-item {
+    display: flex;
+    gap: 20px;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .stop-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 19px;
+    top: 44px;
+    bottom: -1px;
+    width: 1px;
+    background: rgba(0,0,0,0.08);
+  }
+
+  .stop-timeline {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 8px;
+  }
+
+  .stop-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 2px solid rgba(0,0,0,0.2);
+    transition: all 0.25s;
+    margin-top: 6px;
+  }
+
+  .stop-item:hover .stop-dot,
+  .stop-item.active .stop-dot {
+    background: var(--vermillion);
+    border-color: var(--vermillion);
+    box-shadow: 0 0 0 4px rgba(192,57,43,0.15);
+  }
+
+  .stop-time {
+    font-size: 0.65rem;
+    color: rgba(0,0,0,0.3);
+    letter-spacing: 0.05em;
+    margin-top: 6px;
+    white-space: nowrap;
+  }
+
+  .stop-card {
+    flex: 1;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.06);
+    padding: 20px 24px;
+    margin-bottom: 12px;
+    transition: all 0.25s;
+    border-left: 3px solid transparent;
+  }
+
+  .stop-item:hover .stop-card,
+  .stop-item.active .stop-card {
+    border-left-color: var(--vermillion);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+
+  .stop-card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .stop-name {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .stop-type-badge {
+    font-size: 0.65rem;
+    padding: 3px 10px;
+    letter-spacing: 0.1em;
+    background: var(--mist);
+    color: rgba(0,0,0,0.4);
+    white-space: nowrap;
+    margin-left: 10px;
+  }
+
+  .stop-desc {
+    font-size: 0.82rem;
+    color: rgba(0,0,0,0.5);
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+
+  .stop-meta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .stop-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.72rem;
+    color: rgba(0,0,0,0.4);
+  }
+
+  .stop-meta-item svg {
+    width: 12px;
+    height: 12px;
+    opacity: 0.5;
+  }
+
+  .stop-rating {
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  /* MAP PANEL */
+  .map-panel {
+    width: 100%;
+    height: 520px;
+    background: var(--deep);
+    overflow: hidden;
+    position: relative;
+  }
+
+  @media (max-width: 640px) {
+    .map-panel { height: 400px; }
+  }
+
+  #gmap-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+
+  .map-chips {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    z-index: 10;
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+    background: var(--deep);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .map-chips::-webkit-scrollbar { display: none; }
+
+  .map-chip {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.45);
+    font-size: 0.68rem;
+    padding: 9px 14px;
+    cursor: pointer;
+    white-space: nowrap;
+    font-family: inherit;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    letter-spacing: 0.05em;
+  }
+
+  .map-chip:hover { color: rgba(255,255,255,0.85); }
+  .map-chip.active { color: #fff; border-bottom-color: var(--vermillion); }
+
+  .map-footer {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 44px;
+    background: var(--deep);
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    gap: 12px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .map-footer-name {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 0.82rem;
+    color: #fff;
+    font-weight: 700;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .map-footer-link {
+    font-size: 0.68rem;
+    color: var(--gold);
+    text-decoration: none;
+    white-space: nowrap;
+    border-bottom: 1px solid rgba(212,168,84,0.3);
+    flex-shrink: 0;
+  }
+
+  .map-footer-link:hover { color: #e8c06a; }
+
+  /* DAILY OVERVIEW */
+  .overview-strip {
+    background: var(--deep);
+    padding: 32px 40px;
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .overview-strip::-webkit-scrollbar { display: none; }
+
+  .overview-day {
+    flex-shrink: 0;
+    width: 160px;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .overview-day:hover { transform: translateY(-3px); }
+
+  .overview-day-num {
+    font-size: 0.65rem;
+    color: var(--gold);
+    letter-spacing: 0.3em;
+    margin-bottom: 4px;
+  }
+
+  .overview-day-name {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1rem;
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .overview-day-theme {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.3);
+    line-height: 1.4;
+  }
+
+  .overview-day.active .overview-day-name {
+    color: var(--vermillion);
+  }
+
+  .overview-divider {
+    width: 1px;
+    background: rgba(255,255,255,0.05);
+    flex-shrink: 0;
+  }
+
+  /* TIPS SIDEBAR */
+  .tips-section {
+    padding: 32px 40px;
+    background: #fff;
+    border-top: 1px solid rgba(0,0,0,0.06);
+    margin-top: 20px;
+  }
+
+  .tips-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .tips-title::before {
+    content: '';
+    display: block;
+    width: 4px;
+    height: 18px;
+    background: var(--vermillion);
+  }
+
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+  }
+
+  .tip-card {
+    background: var(--mist);
+    padding: 14px 18px;
+    font-size: 0.8rem;
+    color: rgba(0,0,0,0.6);
+    line-height: 1.5;
+  }
+
+  .tip-card strong {
+    display: block;
+    color: var(--ink);
+    margin-bottom: 4px;
+    font-size: 0.82rem;
+  }
+
+  /* TRANSPORT LEGEND */
+  .transport-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+
+  .transport-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.72rem;
+    color: rgba(0,0,0,0.5);
+  }
+
+  .transport-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-8px); }
+  }
+
+  #gmap-iframe { display: none; } /* removed */
+
+  #leaflet-map {
+    position: absolute;
+    top: 38px;
+    left: 0; right: 0; bottom: 44px;
+  }
+
+  /* Leaflet popup dark style */
+  .dark-popup .leaflet-popup-content-wrapper {
+    background: #1a1a2e;
+    color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 0.82rem;
+  }
+  .dark-popup .leaflet-popup-tip { background: #1a1a2e; }
+  .dark-popup .leaflet-popup-content { margin: 10px 14px; }
+  .dark-popup strong { font-family: 'Noto Serif TC', serif; font-size: 0.9rem; }
+  .dark-popup small { color: rgba(255,255,255,0.45); }
+
+  .day-note {
+    background: var(--deep);
+    color: rgba(255,255,255,0.7);
+    font-size: 0.8rem;
+    padding: 12px 18px;
+    margin-bottom: 12px;
+    border-left: 3px solid var(--gold);
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+  }
+
+  .accom-banner {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(44,110,122,0.1);
+    border: 1px solid rgba(44,110,122,0.3);
+    color: var(--teal);
+    font-size: 0.75rem;
+    padding: 7px 16px;
+    margin-bottom: 24px;
+    letter-spacing: 0.08em;
+  }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .itinerary-panel { padding: 20px; }
+    .overview-strip { padding: 20px; }
+    .day-number { font-size: 2.5rem; }
+  }
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-lines"></div>
+  <div class="jp-title">東京</div>
+
+  <!-- Torii SVG -->
+  <svg class="torii-svg" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="30" y="100" width="340" height="30" fill="white"/>
+    <rect x="50" y="70" width="300" height="20" fill="white"/>
+    <rect x="60" y="90" width="30" height="30" rx="0" fill="white"/>
+    <rect x="310" y="90" width="30" height="30" fill="white"/>
+    <rect x="70" y="130" width="20" height="350" fill="white"/>
+    <rect x="310" y="130" width="20" height="350" fill="white"/>
+    <rect x="55" y="58" width="60" height="12" rx="6" fill="white"/>
+    <rect x="285" y="58" width="60" height="12" rx="6" fill="white"/>
+  </svg>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">✦ 完整旅遊攻略 ✦</p>
+    <h1 class="hero-title">東京<span>七日</span><br>深度漫遊</h1>
+    <p class="hero-sub">傳統與現代的完美交融 · 2024–2025</p>
+    <button class="hero-cta" onclick="document.getElementById('app').scrollIntoView({behavior:'smooth'})">
+      <span>開始規劃旅程</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+  <div class="scroll-hint">SCROLL</div>
+</section>
+
+<!-- APP SECTION -->
+<div id="app" class="app-wrapper">
+
+  <!-- Overview Strip -->
+  <div class="overview-strip" id="overviewStrip"></div>
+
+  <!-- Sticky Nav -->
+  <nav class="sticky-nav" id="stickyNav">
+    <span class="nav-brand">東京 · 7日</span>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="content-grid">
+    <!-- Itinerary -->
+    <div class="itinerary-panel" id="itineraryPanel"></div>
+
+    <!-- Map -->
+    <div class="map-panel">
+      <div class="map-chips" id="mapChips"></div>
+      <div id="leaflet-map"></div>
+      <div class="map-footer">
+        <div class="map-footer-name" id="mapFooterName">—</div>
+        <a class="map-footer-link" id="mapFooterLink" href="#" target="_blank">在 Google Maps 導航 ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tips -->
+  <div class="tips-section">
+    <div class="tips-title">旅行小貼士</div>
+    <div class="tips-grid">
+      <div class="tip-card"><strong>🚇 押上交通</strong>住押上超方便！半藏門線直達涉谷、表參道；都營淺草線到淺草、銀座只需10分鐘。</div>
+      <div class="tip-card"><strong>🏠 行李寄放</strong>外出時可將大行李寄放民宿，或利用車站置物櫃（コインロッカー），每日¥300～700。</div>
+      <div class="tip-card"><strong>🦌 鎌倉交通</strong>押上→品川→大船→鎌倉，建議購買「鎌倉・江之島 Free Pass」（¥1,640），無限搭江之電！</div>
+      <div class="tip-card"><strong>🎮 女僕咖啡</strong>秋葉原最推薦 @home cafe（多層包廂）或 Maidreamin，消費含服務費約¥1,500 起，拍照另計。</div>
+      <div class="tip-card"><strong>🌸 花火大會</strong>隅田川花火大會約每年7月最後一個週六，建議提前半年訂押上周邊住宿，地點黃金！</div>
+      <div class="tip-card"><strong>🛁 錢湯禮儀</strong>入浴前全身洗淨才能進池；刺青需確認各湯規定；毛巾不可泡進浴槽。體驗前先查開放時間。</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const ACCOMMODATION = { name: "押上（スカイツリー周邊）", lat: 35.7101, lng: 139.8107 };
+
+const ITINERARY = [
+  {
+    day: 1,
+    title: "抵達 × 龜有",
+    theme: "入境安頓",
+    color: "#c0392b",
+    note: "✈️ 成田機場 → 押上民宿 Check-in，整理行李後輕鬆逛一圈",
+    stops: [
+      { name: "成田機場", type: "機場", time: "依班機", duration: "入境手續", desc: "入境後先在機場購買 IC 卡（Suica），辦理 SIM 卡或租借 Pocket WiFi，換匯日幣備用。", tips: "機場第一航廈地下有 NEX 售票機", rating: null, lat: 35.7653, lng: 140.3862, cost: "交通費" },
+      { name: "押上・民宿 Check-in", type: "住宿", time: "15:00", duration: "30分鐘", desc: "住宿位於押上（東京晴空塔旁），交通便利，附近有超市與便利商店，是深入在地生活的好選擇。", tips: "晴空塔夜景就在門口，記得拍！", rating: 4.3, lat: 35.7101, lng: 139.8107, cost: "住宿費" },
+      { name: "附近藥妝店", type: "購物", time: "16:30", duration: "1小時", desc: "松本清、SUNDRUG 或 Welcia 任選，採購防曬、面膜、零食、藥品等必買品，越早買越輕鬆。", tips: "確認哪些品項有免稅優惠（5,000円以上）", rating: 4.2, lat: 35.7090, lng: 139.8100, cost: "視消費" },
+      { name: "龜有", type: "在地商圈", time: "18:00", duration: "2小時", desc: "《烏龍派出所》的故鄉，商店街有阿兩銅像打卡點，逛逛在地超市與居酒屋，感受東京下町庶民風情。", tips: "找找散落各處的阿兩主題銅像", rating: 4.2, lat: 35.7649, lng: 139.8468, cost: "視消費" },
+    ]
+  },
+  {
+    day: 2,
+    title: "秋葉原 × 神田 × 湯島",
+    theme: "動漫聖地 × 學問之神",
+    color: "#8e44ad",
+    note: "🚃 押上 → 秋葉原（半藏門線直達），步行串連神田、湯島",
+    stops: [
+      { name: "秋葉原電器街", type: "購物 / 動漫", time: "10:00", duration: "2.5小時", desc: "日本電子 × ACG 聖地。Yodobashi Camera、曼達拉科、KOTOBUKIYA 模型店，女僕咖啡廳也在這裡！每層樓都有驚喜。", tips: "メイドカフェ推薦 @home cafe，11樓有免預約座位", rating: 4.4, lat: 35.6986, lng: 139.7731, cost: "視消費" },
+      { name: "女僕咖啡廳體驗", type: "文化體驗", time: "12:00", duration: "1小時", desc: "秋葉原獨有的可愛文化，女僕們用「お帰りなさいませ、ご主人様！」迎接你，點餐、拍照、玩小遊戲，體驗滿滿。", tips: "消費含服務費，約¥1,500起；拍照需額外付費", rating: 4.1, lat: 35.7015, lng: 139.7735, cost: "¥1,500～" },
+      { name: "神田明神（神田神社）", type: "神社", time: "14:00", duration: "1小時", desc: "東京三大祭之一「神田祭」的主辦神社，供奉商業繁盛、良緣之神，《LoveLive!》聖地巡禮必去。", tips: "社務所有動漫聯名御守，值得收藏", rating: 4.4, lat: 35.7022, lng: 139.7665, cost: "免費" },
+      { name: "湯島天滿宮", type: "神社", time: "15:30", duration: "45分鐘", desc: "祭祀學問之神菅原道真，考試季滿滿繪馬掛滿祈願板，氣氛莊嚴又溫暖，梅花季節尤其美麗。", tips: "買個學業御守帶回去送人", rating: 4.3, lat: 35.7078, lng: 139.7627, cost: "免費" },
+      { name: "上野動物園", type: "動物園", time: "16:30", duration: "1.5小時", desc: "日本第一座動物園，明星是可愛的大貓熊，兒童與大人都適合。傍晚人潮較少，更舒適。", tips: "週一公休，入園至16:30為止", rating: 4.2, lat: 35.7154, lng: 139.7717, cost: "¥600" },
+    ]
+  },
+  {
+    day: 3,
+    title: "澀谷 × 原宿 × 表參道",
+    theme: "潮流 × 時尚 × 神社",
+    color: "#e74c3c",
+    note: "🚃 押上 → 涉谷（半藏門線直達），沿線步行串聯各景點",
+    stops: [
+      { name: "澀谷 109", type: "購物", time: "10:00", duration: "1.5小時", desc: "澀谷的流行文化象徵，10層樓集結日系年輕潮流品牌，是認識 GyaruKei 文化的最佳窗口。", tips: "不消費也可進去感受氣氛", rating: 4.0, lat: 35.6592, lng: 139.6983, cost: "視消費" },
+      { name: "竹下通", type: "購物街", time: "11:30", duration: "1小時", desc: "原宿最熱鬧的步行街，滿是可愛服飾、棉花糖、可麗餅、二手古著，是日本原宿文化的縮影。", tips: "週末超擠！建議平日來或早上10點前到", rating: 4.2, lat: 35.6710335, lng: 139.7051821, cost: "視消費" },
+      { name: "明治神宮", type: "神社", time: "13:00", duration: "1小時", desc: "鬱鬱蔥蔥的森林步道通往神宮本殿，供奉明治天皇，是東京最具代表性的靈性空間。", tips: "早到可以看見本殿的換班神職人員儀式", rating: 4.6, lat: 35.6763976, lng: 139.6993259, cost: "免費" },
+      { name: "表參道", type: "時尚街區", time: "14:30", duration: "1.5小時", desc: "東京最精緻的林蔭大道，LOUIS VUITTON、Prada、Tod's 旗艦店林立，安藤忠雄設計的表參道 Hills 值得一逛。", tips: "表參道Hills地下三層有特別展覽空間", rating: 4.4, lat: 35.6654, lng: 139.7124, cost: "視消費" },
+      { name: "澀谷 SKY（澀谷天空）", type: "展望台", time: "17:30", duration: "1.5小時", desc: "澀谷 Scramble Square 46 樓的室外展望台，可 360 度俯瞰東京全景，夕陽轉夜景是全程最高潮！", tips: "務必提前官網訂票，黃昏入場最划算（日夜兩看）", rating: 4.6, lat: 35.6582, lng: 139.7023, cost: "¥2,000" },
+      { name: "涉谷十字路口 夜間", type: "地標", time: "19:30", duration: "30分鐘", desc: "白天與夜晚各有不同風情，霓虹燈下萬人齊步的震撼場面是東京的代名詞，完美結束今日行程。", tips: "忠犬八公像旁邊就是最佳拍照角度", rating: 4.5, lat: 35.659482, lng: 139.7005596, cost: "免費" },
+    ]
+  },
+  {
+    day: 4,
+    title: "淺草 × 藏前 × 十條湯",
+    theme: "下町風情 × 錢湯體驗",
+    color: "#d4a854",
+    note: "🚶 押上步行至淺草（約20分鐘），是鄰近住宿的精華一日遊",
+    stops: [
+      { name: "淺草寺", type: "神社寺廟", time: "08:00", duration: "1.5小時", desc: "東京最古老、最著名的寺廟，雷門大燈籠是絕對必拍，仲見世通老街兩旁滿是傳統伴手禮與小吃。", tips: "早晨8點前人最少，光線最美，適合拍照", rating: 4.5, lat: 35.7147651, lng: 139.7966553, cost: "免費" },
+      { name: "淺草花屋敷（花火大會）", type: "文化體驗", time: "09:30", duration: "1小時", desc: "若旅遊期間適逢隅田川花火大會（每年7月最後一個週六），從淺草周邊可以欣賞到絢爛煙火，是東京最大型的夏日祭典。", tips: "花火大會人超多，建議提早4小時佔位", rating: 4.7, lat: 35.7130, lng: 139.7920, cost: "免費" },
+      { name: "藏前", type: "文青街區", time: "11:00", duration: "2小時", desc: "近年東京最火紅的手工藝人街區，老倉庫改建的個性咖啡廳、皮革職人工房、文具選物店密度超高，適合慢慢逛。", tips: "Nui Hostel 附近的小巷子挖寶最有趣", rating: 4.3, lat: 35.7092, lng: 139.7892, cost: "視消費" },
+      { name: "築地市場 × 歌舞伎座", type: "美食 / 文化", time: "14:00", duration: "2小時", desc: "築地外市場午後仍有新鮮海鮮可買，附近的歌舞伎座是東京傳統表演藝術殿堂，外觀本身就是打卡亮點。", tips: "歌舞伎座一幕鑑賞票（幕見席）約¥1,000起，不看表演拍外觀也值得", rating: 4.3, lat: 35.6684, lng: 139.7702, cost: "視消費" },
+      { name: "十條湯（銭湯）", type: "文化體驗", time: "19:00", duration: "1.5小時", desc: "選擇押上 / 淺草周邊的老字號錢湯，體驗日本道地澡堂文化。高溫浴、水風呂（冷水浴）輪流泡，身心大放鬆。", tips: "攜帶毛巾與沐浴用品，浴巾現場可租；入浴費約¥500", rating: 4.4, lat: 35.7778, lng: 139.7198, cost: "¥500" },
+    ]
+  },
+  {
+    day: 5,
+    title: "池袋 × 太陽城 × 阿佐谷",
+    theme: "動漫天堂 × 在地神社",
+    color: "#2c6e7a",
+    note: "🚃 押上 → 池袋（有樂町線），再轉中央線至阿佐谷",
+    stops: [
+      { name: "池袋 東口商圈", type: "購物 / 動漫", time: "10:00", duration: "1.5小時", desc: "比秋葉原更在地的動漫聖地，乙女之道上有大量聲優、BL、女性向商品。ANIMATE 總本店就在這裡！", tips: "乙女Road 指的是南池袋一帶巷弄", rating: 4.3, lat: 35.7313, lng: 139.7200, cost: "視消費" },
+      { name: "池袋太陽城 (Sunshine City)", type: "主題設施", time: "11:30", duration: "3小時", desc: "超大型購物中心 + 水族館 + 展望台 + 各種主題展，常有期間限定動漫特展！口袋神奇寶貝中心也在這裡。", tips: "神奇寶貝中心 Mega Tokyo 是亞洲最大，必逛！", rating: 4.4, lat: 35.7291, lng: 139.7183, cost: "視消費(各設施另計)" },
+      { name: "池袋西武 / Parco", type: "購物", time: "14:30", duration: "1小時", desc: "池袋西口的 Parco 與東口的西武百貨，集結日本潮流品牌，Parco B1 有大量動漫聯名快閃店。", tips: "Parco 地下名店街有不少性價比高的午餐選項", rating: 4.2, lat: 35.7300, lng: 139.7121, cost: "視消費" },
+      { name: "阿佐谷神明宮", type: "神社", time: "16:30", duration: "45分鐘", desc: "以可愛的卯兔御守聞名全日本，紙雕藝術師手工製作的白兔籤詩超精緻，是小眾御守迷必訪的寶地。", tips: "限定版卯兔御守常常售罄，早點去！", rating: 4.5, lat: 35.7056, lng: 139.6397, cost: "免費" },
+      { name: "阿佐谷商店街 & 晚餐", type: "在地街區", time: "17:30", duration: "1.5小時", desc: "充滿昭和風情的拱廊商店街，居酒屋、炸串、個性小店雲集，是東京最有人情味的在地商圈之一。", tips: "拱廊內的串燒居酒屋性價比超高", rating: 4.2, lat: 35.7054, lng: 139.6364, cost: "視消費" },
+    ]
+  },
+  {
+    day: 6,
+    title: "鎌倉一日遊",
+    theme: "古都漫步 × 海岸風情",
+    color: "#27ae60",
+    note: "🚃 押上 → 品川 → 大船 → 鎌倉（約1.5小時）；建議7點出發避開人潮",
+    stops: [
+      { name: "鶴岡八幡宮", type: "神社", time: "09:00", duration: "1小時", desc: "鎌倉最重要的神社，從小町通走進去，宏偉的石柱大道（段葛）兩旁是櫻花樹，本殿可俯瞰整個鎌倉。", tips: "神社內有鎌倉國寶館，喜歡文物的必進", rating: 4.4, lat: 35.3238, lng: 139.5564, cost: "免費" },
+      { name: "小町通", type: "美食 / 購物", time: "10:00", duration: "1小時", desc: "鎌倉最熱鬧的參道商店街，紫芋可樂餅、鴿子餅乾、鎌倉雕刻工藝品、抹茶甜點一字排開。", tips: "鳩サブレー（鴿子餅乾）是必買伴手禮", rating: 4.3, lat: 35.3245, lng: 139.5519, cost: "視消費" },
+      { name: "報國寺（竹林寺）", type: "寺廟", time: "11:30", duration: "1小時", desc: "「竹的庭院」聞名，大片翠綠竹林中飄散著靜謐禪意，可在茶室品抹茶，感受鎌倉另一種美。", tips: "拍竹林最佳時間是上午光線斜射時", rating: 4.5, lat: 35.3222, lng: 139.5755, cost: "¥500" },
+      { name: "鎌倉大佛（高德院）", type: "歷史文物", time: "13:30", duration: "1小時", desc: "高13.35公尺的露天青銅大佛，自1252年屹立至今，是鎌倉最具代表性的文化遺産，也是日本重要文化財。", tips: "可入大佛內部參觀（¥50），空間很小但體驗難忘", rating: 4.6, lat: 35.3169, lng: 139.5352, cost: "¥300" },
+      { name: "長谷寺", type: "寺廟", time: "15:00", duration: "1小時", desc: "鎌倉最美的花卉寺院，四季輪替的繡球花、梅花、牡丹，加上可俯瞰由比濱海岸的展望台，景色絕美。", tips: "繡球花季（6月）需提前訂參觀票", rating: 4.5, lat: 35.3162, lng: 139.5346, cost: "¥400" },
+      { name: "由比濱 / 材木座海岸", type: "海灘", time: "16:30", duration: "1小時", desc: "鎌倉的海岸線，傍晚陽光灑在太平洋海面上，夏天有海水浴場，秋冬也有衝浪客，是一幅美麗的風景畫。", tips: "海岸旁的江之電電車配上夕陽是絕佳取景角度", rating: 4.4, lat: 35.3116, lng: 139.5393, cost: "免費" },
+    ]
+  },
+  {
+    day: 7,
+    title: "銀座 × 東京鐵塔 × 市谷",
+    theme: "優雅告別 × 城市地標",
+    color: "#c0392b",
+    note: "🏠 退房日，行李可寄放民宿；下午前往機場前逛銀座、東京鐵塔",
+    stops: [
+      { name: "築地外市場（早餐）", type: "美食", time: "08:00", duration: "1小時", desc: "最後一個早晨，用頂級海鮮壽司或鮪魚丼收尾，海膽、鮭魚卵、鰻魚，以最美味的方式道別東京。", tips: "週日部分攤位公休，提前查詢", rating: 4.3, lat: 35.6647703, lng: 139.7702515, cost: "視消費" },
+      { name: "浜離宮恩賜庭園", type: "庭園", time: "09:30", duration: "1小時", desc: "江戶時代德川將軍的賞月庭園，被高樓大廈環繞的傳統日式潮入庭園，是東京最珍貴的都心綠洲之一。", tips: "潮入池（海水庭池）全球罕見，漲退潮時景色各異", rating: 4.4, lat: 35.6594, lng: 139.7630, cost: "¥300" },
+      { name: "歌舞伎座 × 銀座", type: "購物 / 文化", time: "11:00", duration: "2小時", desc: "銀座中央通週日限行車輛，可愜意散步。歌舞伎座外觀壯麗，進塔樓買紀念品；銀座 Itoya 文具店是東京最美的文具殿堂。", tips: "銀座 Itoya（伊東屋）12層樓的文具王國不可錯過", rating: 4.4, lat: 35.6717, lng: 139.7659, cost: "視消費" },
+      { name: "市谷龜岡八幡宮", type: "神社", time: "13:30", duration: "30分鐘", desc: "江戶時代創建的小而精緻的神社，以寵物祈福聞名，也是特色小眾御守收藏地。附近是日本防衛省所在地。", tips: "與三島由紀夫的歷史有關，是文化愛好者的隱秘景點", rating: 4.1, lat: 35.6918, lng: 139.7338, cost: "免費" },
+      { name: "東京鐵塔", type: "地標", time: "15:00", duration: "1.5小時", desc: "1958年建造的朱紅色鐵塔，是昭和東京的永恆象徵。150公尺主展望台可俯瞰都心，晴天可見富士山。", tips: "夕陽時分從芝公園仰角拍鐵塔，比在展望台更美", rating: 4.5, lat: 35.6586, lng: 139.7454, cost: "¥1,200" },
+      { name: "押上 Check-out → 前往機場", type: "交通", time: "18:00", duration: "移動", desc: "取回行李，搭乘成田特急（NEX）或京成 Skyliner 前往成田機場，結束美好的東京7日之旅。", tips: "Skyliner 最快（41分鐘），NEX 可直達新宿池袋", rating: null, lat: 35.7101, lng: 139.8107, cost: "¥2,570" },
+    ]
+  }
+];
+
+let currentDay = 0;
+let currentStop = 0;
+let map = null;
+let markers = [];
+let routeLine = null;
+
+function initMap() {
+  map = L.map('leaflet-map', { zoomControl: true, attributionControl: false })
+         .setView([35.6762, 139.6503], 12);
+
+  // CartoDB Positron — clean light basemap
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+    maxZoom: 19,
+    subdomains: 'abcd'
+  }).addTo(map);
+
+  L.control.attribution({ prefix: '© OpenStreetMap © CARTO' }).addTo(map);
+}
+
+function clearMap() {
+  markers.forEach(m => map.removeLayer(m));
+  markers = [];
+  if (routeLine) { map.removeLayer(routeLine); routeLine = null; }
+}
+
+function showDayOnMap(dayIdx) {
+  if (!map) return;
+  clearMap();
+  const day = ITINERARY[dayIdx];
+  const latlngs = [];
+
+  day.stops.forEach((stop, i) => {
+    const isActive = i === currentStop;
+
+    // Custom numbered marker
+    const html = `<div style="
+      background:${day.color};
+      color:#fff;
+      width:${isActive ? 34 : 28}px;
+      height:${isActive ? 34 : 28}px;
+      border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      font-size:${isActive ? 13 : 11}px;font-weight:700;
+      border:${isActive ? 3 : 2}px solid #fff;
+      box-shadow:0 2px ${isActive ? 12 : 6}px rgba(0,0,0,${isActive ? 0.6 : 0.35});
+      cursor:pointer;
+      transition:all .2s;
+    ">${i + 1}</div>`;
+
+    const icon = L.divIcon({ html, className: '', iconSize: [isActive ? 34 : 28, isActive ? 34 : 28], iconAnchor: [isActive ? 17 : 14, isActive ? 17 : 14] });
+
+    const m = L.marker([stop.lat, stop.lng], { icon })
+      .addTo(map)
+      .bindPopup(`<strong>${stop.name}</strong><br><small>${stop.time} · ${stop.type}</small>`, { className: 'dark-popup', offset: [0, -8] });
+
+    m.on('click', () => {
+      currentStop = i;
+      highlightStop(i);
+      updateMapFooter(dayIdx, i);
+      updateChipsActive(i);
+      showDayOnMap(dayIdx); // re-render markers to update active size
+    });
+
+    markers.push(m);
+    latlngs.push([stop.lat, stop.lng]);
+  });
+
+  // Dashed route polyline
+  if (latlngs.length > 1) {
+    routeLine = L.polyline(latlngs, {
+      color: day.color, weight: 2.5, opacity: 0.55, dashArray: '6,9'
+    }).addTo(map);
+  }
+
+  // Fit bounds or focus active stop
+  if (latlngs.length > 0) {
+    map.fitBounds(latlngs, { padding: [48, 48], maxZoom: 15 });
+  }
+
+  // Open popup on active stop
+  if (markers[currentStop]) {
+    setTimeout(() => markers[currentStop].openPopup(), 300);
+  }
+}
+
+function focusStop(dayIdx, stopIdx) {
+  if (!map || !markers[stopIdx]) return;
+  const stop = ITINERARY[dayIdx].stops[stopIdx];
+  map.flyTo([stop.lat, stop.lng], 16, { duration: 0.7 });
+  setTimeout(() => markers[stopIdx].openPopup(), 750);
+  updateMapFooter(dayIdx, stopIdx);
+}
+
+function updateMapFooter(dayIdx, stopIdx) {
+  const stop = ITINERARY[dayIdx].stops[stopIdx];
+  document.getElementById('mapFooterName').textContent = `${stopIdx + 1}. ${stop.name}`;
+  document.getElementById('mapFooterLink').href =
+    `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(stop.name + ' Tokyo')}`;
+}
+
+function updateChipsActive(stopIdx) {
+  document.querySelectorAll('.map-chip').forEach((c, i) => c.classList.toggle('active', i === stopIdx));
+}
+
+function renderMapChips(dayIdx) {
+  const day = ITINERARY[dayIdx];
+  const chips = document.getElementById('mapChips');
+  chips.innerHTML = day.stops.map((s, i) => `
+    <button class="map-chip ${i === 0 ? 'active' : ''}" onclick="onChipClick(${i})">
+      ${i + 1}. ${s.name.length > 9 ? s.name.substring(0, 9) + '…' : s.name}
+    </button>
+  `).join('');
+}
+
+function onChipClick(stopIdx) {
+  currentStop = stopIdx;
+  updateChipsActive(stopIdx);
+  highlightStop(stopIdx);
+  showDayOnMap(currentDay);
+  focusStop(currentDay, stopIdx);
+  const el = document.getElementById(`stop-${stopIdx}`);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function highlightStop(idx) {
+  document.querySelectorAll('.stop-item').forEach((el, i) => el.classList.toggle('active', i === idx));
+}
+
+function renderOverview() {
+  const strip = document.getElementById('overviewStrip');
+  strip.innerHTML = ITINERARY.map((d, i) => `
+    <div class="overview-day ${i === 0 ? 'active' : ''}" onclick="switchDay(${i})" id="ov-${i}">
+      <div class="overview-day-num">DAY ${d.day}</div>
+      <div class="overview-day-name">${d.title}</div>
+      <div class="overview-day-theme">${d.theme}</div>
+    </div>
+    ${i < ITINERARY.length - 1 ? '<div class="overview-divider"></div>' : ''}
+  `).join('');
+}
+
+function renderNav() {
+  const nav = document.getElementById('stickyNav');
+  const tabs = ITINERARY.map((d, i) => `
+    <button class="day-tab ${i === 0 ? 'active' : ''}" onclick="switchDay(${i})" id="tab-${i}">
+      DAY ${d.day} · ${d.title}
+    </button>
+  `).join('');
+  nav.innerHTML = `<span class="nav-brand">東京 · 7日</span>` + tabs;
+}
+
+function renderItinerary(dayIdx) {
+  const day = ITINERARY[dayIdx];
+  const panel = document.getElementById('itineraryPanel');
+
+  const stopsHtml = day.stops.map((s, i) => `
+    <div class="stop-item" onclick="onStopClick(${i})" id="stop-${i}">
+      <div class="stop-timeline">
+        <div class="stop-dot"></div>
+        <div class="stop-time">${s.time}</div>
+      </div>
+      <div class="stop-card">
+        <div class="stop-card-top">
+          <div class="stop-name">${s.name}</div>
+          <div class="stop-type-badge">${s.type}</div>
+        </div>
+        <div class="stop-desc">${s.desc}</div>
+        <div class="stop-meta">
+          <div class="stop-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            ${s.duration}
+          </div>
+          <div class="stop-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            ${s.cost}
+          </div>
+          ${s.rating ? `<div class="stop-meta-item"><span class="stop-rating">★ ${s.rating}</span></div>` : ''}
+          <div class="stop-meta-item" style="color:${day.color};font-size:0.7rem;">💡 ${s.tips}</div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  panel.innerHTML = `
+    <div class="day-header">
+      <div class="day-number">${String(day.day).padStart(2,'0')}</div>
+      <div class="day-info">
+        <h2>${day.title}</h2>
+        <p>第 ${day.day} 天 · ${day.stops.length} 個景點</p>
+      </div>
+      <div class="day-theme-badge">${day.theme}</div>
+    </div>
+    ${day.note ? `<div class="day-note">${day.note}</div>` : ''}
+    <div class="accom-banner">🏠 住宿：押上（東京晴空塔周邊）· 第 ${day.day <= 6 ? day.day : 6} 夜</div>
+    <div class="stops-list">${stopsHtml}</div>
+  `;
+}
+
+function onStopClick(idx) {
+  currentStop = idx;
+  highlightStop(idx);
+  updateChipsActive(idx);
+  showDayOnMap(currentDay);
+  focusStop(currentDay, idx);
+  const chip = document.querySelectorAll('.map-chip')[idx];
+  if (chip) chip.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  document.querySelector('.map-panel').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function switchDay(dayIdx) {
+  currentDay = dayIdx;
+  currentStop = 0;
+  document.querySelectorAll('.day-tab').forEach((tab, i) => tab.classList.toggle('active', i === dayIdx));
+  document.querySelectorAll('.overview-day').forEach((el, i) => el.classList.toggle('active', i === dayIdx));
+  renderItinerary(dayIdx);
+  renderMapChips(dayIdx);
+  showDayOnMap(dayIdx);
+  updateMapFooter(dayIdx, 0);
+  document.getElementById('itineraryPanel').scrollTop = 0;
+}
+
+// Init
+document.addEventListener('DOMContentLoaded', () => {
+  renderOverview();
+  renderNav();
+  renderItinerary(0);
+  initMap();
+  renderMapChips(0);
+  showDayOnMap(0);
+  updateMapFooter(0, 0);
+});
+</script>
+
+</body>
+</html>
